@@ -47,7 +47,7 @@ def fix_missing_tables():
 
 def fix_broken_fks():
     """
-    Fix broken foreign keys: find them in sqlite_master schema table, then do the
+    Fix broken foreign keys: find them in sqlite_main schema table, then do the
     standard sqlite switcheroo of creating a temp table (with fixed schema), copying
     shit over, dropping old table, making new table with old name (and fixed schema),
     copying shit over once more, drop temp table. Note these inserts aren't
@@ -59,7 +59,7 @@ def fix_broken_fks():
         cursor.execute("DROP TABLE IF EXISTS 'players_playerdb_db_liteattributes';")
         # get all the tables with broken foreignkeys
         cursor.execute("""
-        SELECT tbl_name, sql FROM sqlite_master WHERE sql LIKE '%players_playerdb%';
+        SELECT tbl_name, sql FROM sqlite_main WHERE sql LIKE '%players_playerdb%';
         """)
         rows = cursor.fetchall()
         # disable foreign key integrity constraint checks so we can drop the tables
